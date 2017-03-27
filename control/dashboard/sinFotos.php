@@ -11,9 +11,9 @@
   function validatorDir($id, $dato2)
   {
     if ($id == 0) {
-      $formato = '_0.JPG';
+      $formato = '_1.JPG';
     }elseif ($id == 1) {
-      $formato = '_1.jpg';
+      $formato = '_0.jpg';
     }
 
     $archivo = $dato2 . $formato;
@@ -26,6 +26,10 @@
       return false;
     }
   }
+  
+  $query = $mysql->prepare("SELECT id, dato2 FROM datoscasas ORDER BY dato18 DESC");
+  $query->execute();
+  $rows = $query->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -53,7 +57,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Casa por defecto</h2>
+          <h2>Casas sin fotos</h2>
           <hr>
           <div class="row">
             <div class="col-md-12">
@@ -67,16 +71,13 @@
                 </thead>
                 <tbody>
                   <?php
-                    $query = $mysql->prepare("SELECT * FROM datoscasas ORDER BY dato18 DESC");
-                    $query->execute();
-                    $rows = $query->fetchAll();
                     foreach ($rows as $row):
                       if (validatorDir($row['id'], $row['dato2']) == false):
                   ?>
                     <tr>
-                      <td><?=$dato['dato2']?></td>
-                      <td><?=($dato['id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
-                      <td><span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span></span></td>
+                      <td><?=$row['dato2']?></td>
+                      <td><?=($row['id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
+                      <td><span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> Archive was not found</span></td>
                     </tr>
                   <?php
                       endif;
