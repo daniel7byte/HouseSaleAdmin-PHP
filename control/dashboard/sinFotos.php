@@ -80,11 +80,15 @@
                       <td><span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> Archive was not found</span></td>
                     </tr>
                   <?php
+                        $contador++;
                       endif;
                     endforeach;
                   ?>
                 </tbody>
               </table> 
+              <hr>
+              <h1 style="float: right;">Total: <?=number_format($contador)?></h1>
+              <br><br><br><br><br>
             </div>
           </div>
         </div>
