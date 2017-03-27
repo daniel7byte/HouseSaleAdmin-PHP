@@ -27,9 +27,15 @@
     }
   }
   
-  $query = $mysql->prepare("SELECT id, dato2 FROM datoscasas ORDER BY dato18 DESC");
-  $query->execute();
-  $rows = $query->fetchAll();
+  $queryFMLS = $mysql->prepare("SELECT id, dato2 FROM datoscasas WHERE id = 1 ORDER BY dato18 DESC");
+  $queryFMLS->execute();
+  $rowsFMLS = $queryFMLS->fetchAll();
+
+  $queryGAMLS = $mysql->prepare("SELECT id, dato2 FROM datoscasas WHERE id = 0 ORDER BY dato18 DESC");
+  $queryGAMLS->execute();
+  $rowsGAMLS = $queryGAMLS->fetchAll();
+
+  $comasFormato = ',';
 
 ?>
 <!DOCTYPE html>
@@ -47,6 +53,9 @@
         padding: 3px;
         box-sizing: border-box;
       }
+      .well {
+        overflow: auto;
+      }
     </style>
   <script src="<?=APP_URL?>resources/js/jquery-1.12.3.js" charset="utf-8"></script>
   </head>
@@ -61,37 +70,44 @@
           <hr>
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-striped table-hover ">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Sistema</th>
-                    <th>Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <h2>FMLS</h2>
+                <div class="well">
                   <?php
-                    foreach ($rows as $row):
+                  foreach ($rowsFMLS as $row):
+                    if (validatorDir($row['id'], $row['dato2']) == false):
+                      echo $row['dato2'] . $comasFormato;
+                      $contadorFMLS++;
+                      $contador++;
+                    endif;
+                  endforeach;
+                ?>
+                </div>
+              <hr>
+              <h3 style="float: right;">FMLS: <?=number_format($contadorFMLS)?></h3>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h2>GAMLS</h2>
+                <div class="well">
+                  <?php
+                    foreach ($rowsGAMLS as $row):
                       if (validatorDir($row['id'], $row['dato2']) == false):
-                  ?>
-                    <tr>
-                      <td><?=$row['dato2']?></td>
-                      <td><?=($row['id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
-                      <td><span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> Archive was not found</span></td>
-                    </tr>
-                  <?php
+                        echo $row['dato2'] . $comasFormato;
+                        $contadorGAMLS++;
                         $contador++;
                       endif;
                     endforeach;
                   ?>
-                </tbody>
-              </table> 
+                </div>
               <hr>
-              <h1 style="float: right;">Total: <?=number_format($contador)?></h1>
-              <br><br><br><br><br>
+              <h3 style="float: right;">GAMLS: <?=number_format($contadorGAMLS)?></h3>
             </div>
           </div>
         </div>
+        <hr>
+        <h1 style="float: right;">Total: <?=number_format($contador)?></h1>
       </div>
     </div>
     <script src="<?=APP_URL?>resources/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
