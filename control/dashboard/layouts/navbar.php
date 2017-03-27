@@ -35,6 +35,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mantenimiento <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="<?=APP_URL?>dashboard/limpiarStatus.php">Limpiar STATUS != A</a></li>
+            <li><a href="<?=APP_URL?>dashboard/sinFotos.php">Registos Sin Fotos</a></li>
           </ul>
         </li>
         <?php } ?>
