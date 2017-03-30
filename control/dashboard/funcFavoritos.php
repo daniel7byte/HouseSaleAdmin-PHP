@@ -2,9 +2,12 @@
 
 function getStatus($dato2, $usuario_id)
 {
+
+    $mysql = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
+    
     $query = $mysql->prepare("SELECT * FROM favoritos WHERE casa_dato2 = :dato2 and usuario_id = :usuario_id");
     $query->execute([
-        ':dato2'     => $dato2,
+        ':dato2'      => $dato2,
         ':usuario_id' => $usuario_id,
     ]);
     $count = $query->rowCount();
@@ -22,9 +25,11 @@ function getStatus($dato2, $usuario_id)
 
 function changeStatus($dato2, $usuario_id)
 {
+    $mysql = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
+    
     $query = $mysql->prepare("SELECT * FROM favoritos WHERE casa_dato2 = :dato2 and usuario_id = :usuario_id");
     $query->execute([
-        ':dato2' => $dato2,
+        ':dato2'      => $dato2,
         ':usuario_id' => $usuario_id,
     ]);
     $count = $query->rowCount();
@@ -33,7 +38,7 @@ function changeStatus($dato2, $usuario_id)
 
         $queryDelete = $mysql->prepare("DELETE FROM favoritos WHERE casa_dato2 = :dato2 and usuario_id = :usuario_id");
         $queryDelete->execute([
-            ':dato2' => $dato2,
+            ':dato2'      => $dato2,
             ':usuario_id' => $usuario_id,
         ]);
 
@@ -44,7 +49,7 @@ function changeStatus($dato2, $usuario_id)
 
         $queryInsert = $mysql->prepare("INSERT INTO favoritos(casa_dato2, usuario_id) VALUES(:dato2, :usuario_id);");
         $queryInsert->execute([
-            ':dato2'     => $dato2,
+            ':dato2'      => $dato2,
             ':usuario_id' => $usuario_id,
         ]);
 
@@ -56,6 +61,8 @@ function changeStatus($dato2, $usuario_id)
 
 function clearUser($usuario_id)
 {
+    $mysql = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
+    
     $query = $mysql->prepare("SELECT * FROM favoritos where usuario_id = :usuario_id");
     $query->execute([
         ':usuario_id' => $usuario_id,
@@ -75,19 +82,13 @@ function clearUser($usuario_id)
     return true;
 }
 
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: ' . APP_URL . 'index.php');
-    exit;
-}
-
 if (isset($_POST['api'])) {
 
     if ($_POST['api'] == 'getStatus') {
 
         if (isset($_POST['dato2'])) {
 
-            echo getStatus($_POST['dato2'], $_SESSION['usuario']);
+            echo getStatus($_POST['dato2'], $_SESSION['id']);
 
         } else {
 
@@ -99,7 +100,7 @@ if (isset($_POST['api'])) {
 
         if (isset($_POST['dato2'])) {
 
-            echo changeStatus($_POST['dato2'], $_SESSION['usuario']);
+            echo changeStatus($_POST['dato2'], $_SESSION['id']);
 
         } else {
 
@@ -109,7 +110,7 @@ if (isset($_POST['api'])) {
 
     } elseif ($_POST['api'] == 'clearUser') {
 
-        echo clearUser($_SESSION['usuario']);
+        echo clearUser($_SESSION['id']);
 
     }
 

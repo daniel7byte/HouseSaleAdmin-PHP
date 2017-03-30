@@ -1,12 +1,12 @@
   <?php
-  require_once('../config/parameters.php');
-  require_once('../config/connection.php');
   session_start();
   if(!isset($_SESSION['usuario'])){
     header('Location: ' . APP_URL . 'index.php');
     exit;
   }
 
+  require_once('../config/parameters.php');
+  require_once('../config/connection.php');
   require_once('funcFavoritos.php');
 
   $query = $mysql->prepare("SELECT id, dato2 FROM datoscasas ORDER BY dato18 DESC");
@@ -48,18 +48,22 @@
                   <tr>
                     <th>#</th>
                     <th>Sistema</th>
-                    <th>Estado</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
+                    $contador = 0;
                     foreach ($rows as $row):
-                      if (validatorDir($row['id'], $row['dato2']) == false):
+                      if (getStatus($row['dato2'], $_SESSION['id']) == true):
                   ?>
                     <tr>
                       <td><?=$row['dato2']?></td>
                       <td><?=($row['id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
-                      <td><span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> Archive was not found</span></td>
+                      <td>
+                        <span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> IR</span>
+                        <span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> QUITAR</span>
+                      </td>
                     </tr>
                   <?php
                         $contador++;
