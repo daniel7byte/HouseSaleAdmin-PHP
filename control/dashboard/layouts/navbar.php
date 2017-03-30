@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="<?=APP_URL?>">Inicio <span class="sr-only">(current)</span></a></li>
-        <li><a href="<?=APP_URL?>dashboard/casas.index.php">Casas por defecto <span class="sr-only">(current)</span></a></li>
+        <li><a href="<?=APP_URL?>dashboard/casas.index.php">Casas por defecto</a></li>
         <?php
           if($_SESSION['rol'] == 'ADMIN'){
         ?>
@@ -39,8 +39,10 @@
           </ul>
         </li>
         <?php } ?>
+        <li><a href="<?=APP_URL?>dashboard/buscador.php">Buscador <span class="glyphicon glyphicon-search"></span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="<?=APP_URL?>dashboard/misFavoritos.php">Mis Favoritos <span class="glyphicon glyphicon-star"></span></a></li>
         <li class="active"><a href="<?=APP_URL.'auth/logout.php'?>"><?=$_SESSION['usuario']?> | Salir</a></li>
       </ul>
     </div>
