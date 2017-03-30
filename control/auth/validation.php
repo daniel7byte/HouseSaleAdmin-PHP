@@ -19,25 +19,33 @@
   <body>
     <em>
       <?php
-        include_once('../../control_config/users.php');
-        if($_POST['usuario'] == $user1[0]){
-          if($_POST['contrasenia'] == $user1[2]){
-            $_SESSION['usuario'] = $user1[0];
-            $_SESSION['rol'] = $user1[1];
-            header('location: ../dashboard/index.php');
-          }else{
-            header('location: ../index.php');
-          }
-        }elseif($_POST['usuario'] == $user2[0]){
-          if($_POST['contrasenia'] == $user2[2]){
-            $_SESSION['usuario'] = $user2[0];
-            $_SESSION['rol'] = $user2[1];
-            header('location: ../dashboard/index.php');
-          }else{
-            header('location: ../index.php');
-          }
-        }else{
-          header('location: ../index.php');
+        $query = $mysql->prepare("SELECT * FROM usuarios WHERE usuario = :usuario");
+        $query->execute([':usuario' => $_POST['usuario']]);
+        $result = $query->fetchAll();
+        foreach ($result as $row) {
+          $id = $row['id'];
+          $usuario = $row['usuario'];
+          $hash = $row['contrasenia'];
+          $rol = $row['rol'];
+          break;
+        }
+        if (password_verify($_POST['contrasenia'], $hash)) {
+          echo 'Contraseña válida!';
+          $_SESSION['id'] = $id;
+          $_SESSION['usuario'] = $usuario;
+          $_SESSION['rol'] = $rol;
+        ?>
+        <script type="text/javascript">
+          setTimeout(function(){ window.location = '<?=APP_URL?>dashboard/index.php'; }, 500);
+        </script>
+        <?php
+        } else {
+          echo 'La contraseña no es válida';
+        ?>
+        <script type="text/javascript">
+          setTimeout(function(){ window.location = '<?=APP_URL?>index.php'; }, 500);
+        </script>
+        <?php
         }
       ?>
     </em>
