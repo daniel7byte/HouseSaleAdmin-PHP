@@ -1,5 +1,14 @@
 <?php
 
+session_start();
+if(!isset($_SESSION['usuario'])){
+    header('Location: ' . APP_URL . 'index.php');
+    exit;
+}
+
+require_once('../config/parameters.php');
+require_once('../config/connection.php');
+
 function getStatus($dato2, $usuario_id)
 {
 

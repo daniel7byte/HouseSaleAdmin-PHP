@@ -1,9 +1,9 @@
-  <?php
-  session_start();
-  if(!isset($_SESSION['usuario'])){
-    header('Location: ' . APP_URL . 'index.php');
-    exit;
-  }
+<?php
+  // session_start();
+  // if(!isset($_SESSION['usuario'])){
+  //   header('Location: ' . APP_URL . 'index.php');
+  //   exit;
+  // }
 
   require_once('../config/parameters.php');
   require_once('../config/connection.php');
@@ -12,6 +12,8 @@
   $query = $mysql->prepare("SELECT id, dato2 FROM datoscasas ORDER BY dato18 DESC");
   $query->execute();
   $rows = $query->fetchAll();
+
+  $urlMain = 'http://www.joygle.com/property_details.php?id=';
 
 ?>
 <!DOCTYPE html>
@@ -22,7 +24,7 @@
     <link rel="stylesheet" href="<?=APP_URL?>resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=APP_URL?>resources/css/flatly.min.css">
     <link rel="stylesheet" href="<?=APP_URL?>resources/datatables/css/jquery.dataTables.min.css">
-    <title>Casa por defecto</title>
+    <title>Mis Favoritos</title>
     <style media="screen">
       tfoot input {
         width: 100%;
@@ -57,12 +59,16 @@
                     foreach ($rows as $row):
                       if (getStatus($row['dato2'], $_SESSION['id']) == true):
                   ?>
-                    <tr>
+                    <tr id="<?=$row['dato2']?>">
                       <td><?=$row['dato2']?></td>
                       <td><?=($row['id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
                       <td>
-                        <span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> IR</span>
-                        <span class="label label-danger"><span class="glyphicon glyphicon-floppy-remove"></span> QUITAR</span>
+                        <a target="_blank" href="<?=$urlMain.$row['dato2']?>" class="btn btn-success btn-xs">
+                          <span class="glyphicon glyphicon-link"></span>
+                        </a>
+                        <a target="_blank" onclick="event.preventDefault(); changeStatus(<?=$row['dato2']?>)" class="btn btn-danger btn-xs">
+                          <span class="glyphicon glyphicon-floppy-remove"></span>
+                        </a>
                       </td>
                     </tr>
                   <?php
@@ -73,7 +79,7 @@
                 </tbody>
               </table> 
               <hr>
-              <h1 style="float: right;">Total: <?=number_format($contador)?></h1>
+              <h1 style="float: right;">Total: <span id="contador"><?=number_format($contador)?></span></h1>
               <br><br><br><br><br>
             </div>
           </div>
@@ -81,5 +87,29 @@
       </div>
     </div>
     <script src="<?=APP_URL?>resources/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script>
+      function changeStatus(id) {
+        if (confirm("¿Eliminar?") == true) {
+          $.ajax({
+          type: 'POST',
+            url: 'funcFavoritos.php',
+            data: {
+              api: 'changeStatus',
+              dato2: id
+            },
+            success: function(result){
+              if(result == false){
+                  $("#"+id).remove();
+                  var count = parseInt($("#contador").html());
+                  count = count - 1;
+                  $("#contador").html(count);
+              }else{
+                  console.log(result)
+              }
+            }
+          });
+        }
+      }
+    </script>
   </body>
 </html>

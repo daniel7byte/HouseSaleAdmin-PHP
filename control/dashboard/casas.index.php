@@ -14,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?=APP_URL?>resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=APP_URL?>resources/css/flatly.min.css">
-    <link rel="stylesheet" href="<?=APP_URL?>resources/datatables/css/jquery.dataTables.min.css">
     <title>Casa por defecto</title>
     <style media="screen">
       tfoot input {
