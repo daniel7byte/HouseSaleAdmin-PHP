@@ -17,6 +17,20 @@
 
   $urlMain = 'http://www.joygle.com/property_details.php?id=';
 
+  function getSystemInmo($id) {
+    if ($id == null) {
+      return 'NULL';
+    }else{
+      if ($id == "1") {
+        return 'FMLS';
+      } elseif ($id == "0") {
+        return 'GAMLS';
+      }else{
+        return $id;
+      }
+    }
+  }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,7 +76,7 @@
                   ?>
                     <tr id="<?=$row['casa_dato2']?>">
                       <td><?=$row['casa_dato2']?></td>
-                      <td><?=($row['casa_id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
+                      <td><?=(getSystemInmo($row['casa_id']))?></td>
                       <td>
                         <a target="_blank" href="<?=$urlMain.$row['casa_dato2']?>" class="btn btn-success btn-xs">
                           <span class="glyphicon glyphicon-link"></span>
