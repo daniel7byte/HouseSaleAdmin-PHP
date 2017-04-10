@@ -9,8 +9,10 @@
   require_once('../config/connection.php');
   require_once('funcFavoritos.php');
 
-  $query = $mysql->prepare("SELECT id, dato2 FROM datoscasas ORDER BY dato18 DESC");
-  $query->execute();
+  $query = $mysql->prepare("SELECT * FROM favoritos WHERE usuario_id = :usuario_id ORDER BY id DESC");
+  $query->execute([
+    'usuario_id' => $_SESSION['id']
+  ]);
   $rows = $query->fetchAll();
 
   $urlMain = 'http://www.joygle.com/property_details.php?id=';
@@ -57,23 +59,21 @@
                   <?php
                     $contador = 0;
                     foreach ($rows as $row):
-                      if (getStatus($row['dato2'], $_SESSION['id']) == true):
                   ?>
-                    <tr id="<?=$row['dato2']?>">
-                      <td><?=$row['dato2']?></td>
-                      <td><?=($row['id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
+                    <tr id="<?=$row['casa_dato2']?>">
+                      <td><?=$row['casa_dato2']?></td>
+                      <td><?=($row['casa_id'] == 1 ? 'FMLS' : 'GAMLS')?></td>
                       <td>
-                        <a target="_blank" href="<?=$urlMain.$row['dato2']?>" class="btn btn-success btn-xs">
+                        <a target="_blank" href="<?=$urlMain.$row['casa_dato2']?>" class="btn btn-success btn-xs">
                           <span class="glyphicon glyphicon-link"></span>
                         </a>
-                        <a target="_blank" onclick="event.preventDefault(); changeStatus(<?=$row['dato2']?>)" class="btn btn-danger btn-xs">
+                        <a target="_blank" onclick="event.preventDefault(); changeStatus(<?=$row['casa_dato2']?>)" class="btn btn-danger btn-xs">
                           <span class="glyphicon glyphicon-floppy-remove"></span>
                         </a>
                       </td>
                     </tr>
                   <?php
-                        $contador++;
-                      endif;
+                      $contador++;
                     endforeach;
                   ?>
                 </tbody>

@@ -9,3 +9,7 @@ CREATE TABLE `joygle`.`favoritos` ( `id` INT NOT NULL AUTO_INCREMENT , `casa_dat
 -- REGISTRAR USUARIO admin:secret
 INSERT INTO `usuarios` (`id`, `usuario`, `contrasenia`, `rol`) VALUES
 (1, 'admin', '$2y$12$iUB6U9KutI.Jl6C3WbRahewwUxugsJF4CLsrbMPjsEy1Q4WX6vgKa', 'ADMIN');
+
+-- Identificador Plataforma
+ALTER TABLE `favoritos` ADD `casa_id` INT NOT NULL AFTER `id`;
+ALTER TABLE `favoritos` CHANGE `casa_id` `casa_id` INT(11) NULL DEFAULT NULL;
