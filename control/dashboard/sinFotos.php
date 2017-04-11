@@ -37,6 +37,8 @@
 
   $comasFormato = ',';
 
+  $contador = 0;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,6 +75,7 @@
               <h2>FMLS</h2>
                 <div class="well">
                   <?php
+                  $contadorFMLS = 0;
                   foreach ($rowsFMLS as $row):
                     if (validatorDir($row['id'], $row['dato2']) == false):
                       echo $row['dato2'] . $comasFormato;
@@ -92,6 +95,7 @@
               <h2>GAMLS</h2>
                 <div class="well">
                   <?php
+                    $contadorGAMLS = 0;
                     foreach ($rowsGAMLS as $row):
                       if (validatorDir($row['id'], $row['dato2']) == false):
                         echo $row['dato2'] . $comasFormato;
