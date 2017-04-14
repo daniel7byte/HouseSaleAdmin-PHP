@@ -48,7 +48,32 @@
         box-sizing: border-box;
       }
     </style>
-  <script src="<?=APP_URL?>resources/js/jquery-1.12.3.js" charset="utf-8"></script>
+    <script src="<?=APP_URL?>resources/js/jquery-1.12.3.js" charset="utf-8"></script>
+    <script>
+      function changeStatus(id, dato2) {
+        if (confirm("¿Eliminar?") == true) {
+          $.ajax({
+          type: 'POST',
+            url: 'funcFavoritos.php',
+            data: {
+              api: 'changeStatus',
+              id: id,
+              dato2: dato2
+            },
+            success: function(result){
+              if(result == false){
+                  $("#"+dato2).remove();
+                  var count = parseInt($("#contador").html());
+                  count = count - 1;
+                  $("#contador").html(count);
+              }else{
+                  console.log(result)
+              }
+            }
+          });
+        }
+      }
+    </script>
   </head>
   <body style="padding-top: 60px;">
 
@@ -81,7 +106,7 @@
                         <a target="_blank" href="<?=$urlMain.$row['casa_dato2']?>" class="btn btn-success btn-xs">
                           <span class="glyphicon glyphicon-link"></span>
                         </a>
-                        <a target="_blank" onclick="event.preventDefault(); changeStatus(<?=$row['casa_dato2']?>)" class="btn btn-danger btn-xs">
+                        <a target="_blank" onclick="event.preventDefault(); changeStatus(<?=$row['casa_id']?>, <?=$row['casa_dato2']?>)" class="btn btn-danger btn-xs">
                           <span class="glyphicon glyphicon-floppy-remove"></span>
                         </a>
                       </td>
@@ -101,29 +126,5 @@
       </div>
     </div>
     <script src="<?=APP_URL?>resources/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-    <script>
-      function changeStatus(id) {
-        if (confirm("¿Eliminar?") == true) {
-          $.ajax({
-          type: 'POST',
-            url: 'funcFavoritos.php',
-            data: {
-              api: 'changeStatus',
-              dato2: id
-            },
-            success: function(result){
-              if(result == false){
-                  $("#"+id).remove();
-                  var count = parseInt($("#contador").html());
-                  count = count - 1;
-                  $("#contador").html(count);
-              }else{
-                  console.log(result)
-              }
-            }
-          });
-        }
-      }
-    </script>
   </body>
 </html>

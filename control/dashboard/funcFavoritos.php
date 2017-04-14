@@ -1,19 +1,19 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['usuario'])){
+if (!isset($_SESSION['usuario'])) {
     header('Location: ' . APP_URL . 'index.php');
     exit;
 }
 
-require_once('../config/parameters.php');
-require_once('../config/connection.php');
+require_once '../config/parameters.php';
+require_once '../config/connection.php';
 
 function getStatus($dato2, $usuario_id)
 {
 
-    $mysql = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
-    
+    $mysql = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+
     $query = $mysql->prepare("SELECT * FROM favoritos WHERE casa_dato2 = :dato2 and usuario_id = :usuario_id");
     $query->execute([
         ':dato2'      => $dato2,
@@ -32,10 +32,10 @@ function getStatus($dato2, $usuario_id)
     }
 }
 
-function changeStatus($dato2, $usuario_id)
+function changeStatus($id, $dato2, $usuario_id)
 {
-    $mysql = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
-    
+    $mysql = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+
     $query = $mysql->prepare("SELECT * FROM favoritos WHERE casa_dato2 = :dato2 and usuario_id = :usuario_id");
     $query->execute([
         ':dato2'      => $dato2,
@@ -56,8 +56,9 @@ function changeStatus($dato2, $usuario_id)
 
     } else {
 
-        $queryInsert = $mysql->prepare("INSERT INTO favoritos(casa_dato2, usuario_id) VALUES(:dato2, :usuario_id);");
+        $queryInsert = $mysql->prepare("INSERT INTO favoritos(casa_id, casa_dato2, usuario_id) VALUES(:id, :dato2, :usuario_id);");
         $queryInsert->execute([
+            ':id'         => $id,
             ':dato2'      => $dato2,
             ':usuario_id' => $usuario_id,
         ]);
@@ -70,8 +71,8 @@ function changeStatus($dato2, $usuario_id)
 
 function clearUser($usuario_id)
 {
-    $mysql = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
-    
+    $mysql = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+
     $query = $mysql->prepare("SELECT * FROM favoritos where usuario_id = :usuario_id");
     $query->execute([
         ':usuario_id' => $usuario_id,
@@ -109,7 +110,7 @@ if (isset($_POST['api'])) {
 
         if (isset($_POST['dato2'])) {
 
-            echo changeStatus($_POST['dato2'], $_SESSION['id']);
+            echo changeStatus($_POST['id'], $_POST['dato2'], $_SESSION['id']);
 
         } else {
 

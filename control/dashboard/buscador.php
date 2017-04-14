@@ -26,15 +26,7 @@
         <div class="col-md-12">
           <h2>Buscador</h2>
           <hr>
-          <form action="resultados.php" method="post">
-            <div class="row">
-              <div class="col-md-12">
-  
-                <!-- CAMPOS -->
-
-              </div>
-            </div>
-            <hr>
+          <form action="resultados.php" method="get">
             <div class="row">
               <div class="col-md-6 col-md-offset-6">
                 <div class="form-group">
@@ -82,6 +74,7 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 5px;">Buscar <span class="glyphicon glyphicon-search"></span></button>
               </div>
             </div>
+            <hr>
           </form>
         </div>
       </div>

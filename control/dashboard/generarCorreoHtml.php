@@ -91,7 +91,7 @@
                   <div class="media-left">
                     <a href="<?=$urlMain.$house['dato2']?>">
                       <!-- http://www.joygle.com/dinamic_filter/getImages.php?id=5823000&w=166&h=125 -->
-                      <img class="img img-responsive media-object" src="<?=$urlMainImg.$house['dato2']?>&w=166&h=125" alt="...">
+                      <img class="img media-object" src="<?=$urlMainImg.$house['dato2']?>&w=166&h=125" alt="...">
                     </a>
                   </div>
                   <div class="media-body">
@@ -99,6 +99,8 @@
                     
                     <?=$house['dato10'] . ', '. $house['dato11'] . ', GA ' . $house['dato24'] . ', US'?><br>
                     
+                    <strong>$<?=number_format($house['dato5'])?></strong><br>
+
                     <span class="label label-primary"><?=(getSystemInmo($house['id']))?></span><br><br>
                     
                     <a target="_blank" href="<?=$urlMain.$house['dato2']?>" class="btn btn-success btn-xs">
