@@ -73,46 +73,46 @@
           <hr>
           <div class="row">
             <div class="col-md-12">
-              
-              <!-- <div class="media" style="background-color: #f60;">
-                <div class="media-left">
-                  <a href="http://www.joygle.com/">
-                    <img class="media-object" src="http://localhost/Joygle/HouseSale-PHP/img/logo-joygle-big.png" alt="Joygle">
-                  </a>
-                </div>
-              </div> -->
-
-              <?php
-                foreach ($rows as $row):
-                  $houses = getContentInmo($row['casa_dato2']);
-                  foreach ($houses as $house):
-              ?>
-                <div class="media" id="<?=$house['dato2']?>">
-                  <div class="media-left">
-                    <a href="<?=$urlMain.$house['dato2']?>">
+            <div class="table-responsive">
+              <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Address</th>
+                    <th>Platform</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    foreach ($rows as $row):
+                      $houses = getContentInmo($row['casa_dato2']);
+                      foreach ($houses as $house):
+                  ?>
+                    <tr id="<?=$house['dato2']?>">
+                      <td><?=$house['dato2']?></td>
                       <!-- http://www.joygle.com/dinamic_filter/getImages.php?id=5823000&w=166&h=125 -->
-                      <img class="img img-responsive media-object" src="<?=$urlMainImg.$house['dato2']?>&w=166&h=125" alt="...">
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading"><?=$house['dato7']?></h4>
-                    
-                    <?=$house['dato10'] . ', '. $house['dato11'] . ', GA ' . $house['dato24'] . ', US'?><br>
-                    
-                    <span class="label label-primary"><?=(getSystemInmo($house['id']))?></span><br><br>
-                    
-                    <a target="_blank" href="<?=$urlMain.$house['dato2']?>" class="btn btn-success btn-xs">
-                      More details
-                      <span class="glyphicon glyphicon-share"></span>
-                    </a>
-                  </div>
-                </div>
-                <hr>
-              <?php
-                  endforeach;
-                endforeach;
-              ?>
-              <hr>
+                      <td><img src="<?=$urlMainImg.$house['dato2']?>&w=166&h=125"></td>
+                      <td>
+                        <span style="font-weight: bold;"><?=$house['dato7']?></span>, 
+                        <?=$house['dato10'] . ', '. $house['dato11'] . ', GA ' . $house['dato24'] . ', US'?>
+                      </td>
+                      <td><?=(getSystemInmo($house['id']))?></td>
+                      <td>
+                        <a target="_blank" href="<?=$urlMain.$house['dato2']?>" class="btn btn-success btn-xs">
+                          More details
+                          <span class="glyphicon glyphicon-share"></span>
+                        </a>
+                      </td>
+                    </tr>
+                  <?php
+                      endforeach;
+                    endforeach;
+                  ?>
+                </tbody>
+              </table>
+            </div>
+            <hr>  
             </div>
           </div>
         </div>

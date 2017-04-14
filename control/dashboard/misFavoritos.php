@@ -11,7 +11,7 @@
 
   $query = $mysql->prepare("SELECT * FROM favoritos WHERE usuario_id = :usuario_id ORDER BY id DESC");
   $query->execute([
-    'usuario_id' => $_SESSION['id']
+    ':usuario_id' => $_SESSION['id']
   ]);
   $rows = $query->fetchAll();
 
@@ -57,7 +57,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Mis Favoritos <a href="<?=APP_URL?>dashboard/generarCorreoHtml.php" class="btn btn-success">Generar HTML <span class="glyphicon glyphicon-list-alt"></span></a></h2>
+          <h2>Mis Favoritos <a href="<?=APP_URL?>dashboard/generarCorreoHtml.php" class="btn btn-success">Generar HTML <span class="glyphicon glyphicon-wrench"></span></a></h2>
           <hr>
           <div class="row">
             <div class="col-md-12">
