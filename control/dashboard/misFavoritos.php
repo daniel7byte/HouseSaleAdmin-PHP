@@ -73,6 +73,24 @@
           });
         }
       }
+      function clearUser() {
+        if (confirm('¿Seguro?') == true) {
+          $.ajax({
+          type: 'POST',
+            url: 'funcFavoritos.php',
+            data: {
+              api: 'clearUser'
+            },
+            success: function(result){
+              if(result == true){
+                  location.reload(true);
+              }else{
+                  console.log(result)
+              }
+            }
+          });
+        }
+      }
     </script>
   </head>
   <body style="padding-top: 60px;">
@@ -82,7 +100,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Mis Favoritos <a href="<?=APP_URL?>dashboard/generarCorreoHtml.php" class="btn btn-success">Generar HTML <span class="glyphicon glyphicon-wrench"></span></a></h2>
+          <h2>Mis Favoritos 
+            <a href="<?=APP_URL?>dashboard/generarCorreoHtml.php" class="btn btn-success">Generar HTML <span class="glyphicon glyphicon-wrench"></span></a>
+            <a href="#" onclick="event.preventDefault(); clearUser();" class="btn btn-danger">Limpiar Listado <span class="glyphicon glyphicon-trash"></span></a>
+            </h2>
           <hr>
           <div class="row">
             <div class="col-md-12">

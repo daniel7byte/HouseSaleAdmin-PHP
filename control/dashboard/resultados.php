@@ -68,7 +68,7 @@ function getSystemInmo($id) {
     <script src="<?=APP_URL?>resources/js/jquery-1.12.3.js" charset="utf-8"></script>
     <script>
       function changeStatus(id, dato2) {
-        if (confirm("Cambiar estado") == true) {
+        // if (confirm("Cambiar estado") == true) {
           $.ajax({
           type: 'POST',
             url: 'funcFavoritos.php',
@@ -89,7 +89,7 @@ function getSystemInmo($id) {
               }
             }
           });
-        }
+        // }
       }
     </script>
   </head>
@@ -100,7 +100,9 @@ function getSystemInmo($id) {
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Resultados <a href="<?=APP_URL?>dashboard/misFavoritos.php" class="btn btn-success">Ver Listado <span class="glyphicon glyphicon-list-alt"></span></a></h2>
+          <h2>Resultados 
+            <!-- <a href="<?=APP_URL?>dashboard/misFavoritos.php" class="btn btn-success">Mis Favoritos <span class="glyphicon glyphicon-star"></span></a> -->
+            </h2>
           <hr>
           <div class="row">
             <div class="col-md-12">

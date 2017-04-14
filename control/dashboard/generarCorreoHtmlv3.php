@@ -100,9 +100,12 @@
                     <?=$house['dato10'] . ', '. $house['dato11'] . ', GA ' . $house['dato24'] . ', US'?><br>
                     
                     <strong>$<?=number_format($house['dato5'])?></strong><br>
+
+                    <span class="label label-primary"><?=(getSystemInmo($house['id']))?></span><br><br>
                     
-                    <a target="_blank" href="<?=$urlMain.$house['dato2']?>">
-                      <?=$urlMain.$house['dato2']?>
+                    <a target="_blank" href="<?=$urlMain.$house['dato2']?>" class="btn btn-success btn-xs">
+                      More details
+                      <span class="glyphicon glyphicon-share"></span>
                     </a>
                   </div>
                 </div>

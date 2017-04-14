@@ -69,7 +69,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Mis Favoritos <a href="<?=APP_URL?>dashboard/misFavoritos.php" class="btn btn-success">Ver Listado <span class="glyphicon glyphicon-list-alt"></span></a></h2>
+          <h2>Correo HTML <a href="<?=APP_URL?>dashboard/misFavoritos.php" class="btn btn-success">Ver Listado <span class="glyphicon glyphicon-list-alt"></span></a></h2>
           <hr>
           <div class="row">
             <div class="col-md-12">
