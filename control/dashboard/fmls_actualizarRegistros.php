@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-md-12">
           <h2>Formulario FMLS - ACTUALIZAR</h2>
-          <h4>FMLS# | Zip Code | Status | List Price | Elementary School | Middle School | High School</h4>
+          <h4>FMLS# | Zip Code | Status | List Price | Elementary School | Middle School | High School | Public Remarks-Consumer View | Listing Agent Name | List Agent Direct Work Phone"</h4>
           <hr>
           <div class="well">
             <form id="myForm" class="form-horizontal" action="fmls_procesarActualizar.php" method="post" autocomplete="off" enctype="multipart/form-data">

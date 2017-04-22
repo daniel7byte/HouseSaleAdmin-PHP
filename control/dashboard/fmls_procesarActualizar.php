@@ -54,8 +54,21 @@ while ($data = fgetcsv($file, 1000, ",")) {
   }
 
   $status = ($data['2'] == 'Active' ? 'A' : $data['2']);
+  
+  $queryUpdate = $mysql->prepare("UPDATE datoscasas SET dato26 = :dato26, dato27 = :dato27, dato28 = :dato28, dato24 = :dato24, dato6 = :dato6, dato5 = :dato5, description = :description, dato29 = :dato29, dato30 = :dato30 WHERE dato2 = :dato2;");
 
-  $queryUpdate = $mysql->query('UPDATE datoscasas SET dato26="'.$data['4'].'", dato27="'.$data['5'].'", dato28="'.$data['6'].'", dato24="'.$data['1'].'", dato6="'.$status.'", dato5="'.$data['3'].'", description="'.$data['7'].'", dato29="'.$data['8'].'", dato30="'.$data['9'].'" WHERE dato2="'.$data['0'].'";');
+  $queryUpdate->execute([
+    ':dato26' => $data['4'],
+    ':dato27' => $data['5'],
+    ':dato28' => $data['6'],
+    ':dato24' => $data['1'],
+    ':dato6' => $status,
+    ':dato5' => $data['3'],
+    ':description' => $data['7'],
+    ':dato29' => $data['8'],
+    ':dato30' => $data['9'],
+    ':dato2' => $data['0']
+  ]);
 
   if ($queryUpdate) {
     echo "OK (".$data['0'].")";
