@@ -13,3 +13,7 @@ INSERT INTO `usuarios` (`id`, `usuario`, `contrasenia`, `rol`) VALUES
 -- Identificador Plataforma
 ALTER TABLE `favoritos` ADD `casa_id` INT NOT NULL AFTER `id`;
 ALTER TABLE `favoritos` CHANGE `casa_id` `casa_id` INT(11) NULL DEFAULT NULL;
+
+
+-- Nuevos Campos Abril 21 del 2017
+ALTER TABLE `datoscasas` ADD `dato29` TEXT NULL DEFAULT NULL AFTER `description`, ADD `dato30` TEXT NULL DEFAULT NULL AFTER `dato29`, ADD `dato31` TEXT NULL DEFAULT NULL AFTER `dato30`;

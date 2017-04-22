@@ -55,22 +55,6 @@ while ($data = fgetcsv($file, 1000, ",")) {
 
   $status = ($data['2'] == 'Active' ? 'A' : $data['2']);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   $queryUpdate = $mysql->query('UPDATE datoscasas SET 
                                 dato2="'.$data['0'].'", 
                                 dato5="'.$data['1'].'", 
