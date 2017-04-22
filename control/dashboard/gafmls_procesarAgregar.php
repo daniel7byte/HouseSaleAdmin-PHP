@@ -64,8 +64,9 @@ while ($data = fgetcsv($file, 1000, ",")) {
 
   $status = ($data['2'] == 'Active' ? 'A' : $data['2']);
 
-  $queryUpdate = $mysql->query('INSERT INTO datoscasas (id, dato1, dato2, dato3, dato4, dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12, dato13, dato14, dato15, dato16, dato17, dato18, dato19, dato20, dato21, dato22, dato23, dato24, dato25, dato26, dato27, dato28) 
-VALUES ("0", "", "'.$data['0'].'", "", "", "'.num($data['1']).'", "'.$data['2'].'", "'.$data['3'].'", "", "'.$data['4'].'", "'.$data['5'].'", "'.$data['6'].'", "'.$data['7'].'", "'.$data['8'].'", "'.$data['9'].'", "'.$data['10'].'", "", "", "", "", "", "", "", "", "'.zip($data['11']).'", "", "'.$data['12'].'", "'.$data['13'].'", "'.$data['14'].'")');
+  $queryUpdate = $mysql->query('INSERT INTO datoscasas (id, dato1, dato2, dato3, dato4, dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12, dato13, dato14, dato15, dato16, dato17, dato18, dato19, dato20, dato21, dato22, dato23, dato24, dato25, dato26, dato27, dato28, dato29, dato30) 
+VALUES ("0", "", "'.$data['0'].'", "", "", "'.num($data['1']).'", "'.$data['2'].'", "'.$data['3'].'", "", "'.$data['4'].'", "'.$data['5'].'", "'.$data['6'].'", "'.$data['7'].'", "'.$data['8'].'", "'.$data['9'].'", "'.$data['10'].'", "", "", "", "", "", "", "", "", "'.zip($data['11']).'", "", "'.$data['12'].'", "'.$data['13'].'", "'.$data['14'].'", "'.$data['15'].'", "'.$data['16'].'")');
+  
   if ($queryUpdate) {
     echo "OK (".$data['0'].")";
   }else{

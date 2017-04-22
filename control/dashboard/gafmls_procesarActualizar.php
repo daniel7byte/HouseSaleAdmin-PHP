@@ -69,7 +69,9 @@ while ($data = fgetcsv($file, 1000, ",")) {
                                 dato24="'.$data['11'].'", 
                                 dato26="'.$data['12'].'", 
                                 dato27="'.$data['13'].'", 
-                                dato28="'.$data['14'].'" 
+                                dato28="'.$data['14'].'" ,
+                                dato29="'.$data['15'].'" ,
+                                dato30="'.$data['16'].'" 
                                 WHERE dato2="'.$data['0'].'";');
   if ($queryUpdate) {
     echo "OK (".$data['0'].")";
